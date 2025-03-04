@@ -1,0 +1,201 @@
+body {
+    font-family: 'Helvetica';
+    padding: 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0 auto;
+    color: #20232e;
+    width: 100%;
+    margin-top: 2em;
+}
+
+a {
+    color: #578ff1;
+    text-decoration: inherit;
+}
+
+.nolink {
+    color: inherit; 
+    text-decoration: inherit; 
+}
+
+
+#top h2 {
+    margin: 0;
+    text-align: center;
+    font-family: inherit;
+}
+
+h2 {
+    margin: 0;
+    margin-left: -4px;
+    margin-top: -4px;
+    margin-bottom:8px;
+    font-family: inherit;
+    font-weight:normal;
+}
+
+h3 {
+    margin-left: -4px;
+    margin-top:8px;
+    margin-bottom:13px;
+    font-family: inherit;
+    font-weight:normal;
+}
+
+h4 {
+    margin: 0;
+    margin-left: -2px;
+    font-family: inherit;
+}
+
+p {
+    font-size: 0.95em;
+    margin: 0;
+}
+
+.content {
+    background: white;
+    padding: 12px;
+}
+
+.border {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 6px;
+    max-width:40em;
+}
+
+.wide {
+    width: 100%;
+}
+
+
+@media (max-width: 1000px) {
+    .border {
+        width: 70%;
+    }
+
+    .wide {
+        width: 90%;
+    }
+}
+
+.borderlow {
+    background: url('/images/dither_lowdense.svg') repeat;
+}
+
+#logo {
+    max-width: 256px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#logocontainer {
+    text-align: center;
+}
+
+
+.contentimg {
+    max-width: 90%;
+    margin: 10px;
+}
+
+.bottom {
+    margin-top: 70px;
+}
+
+.hoverImage {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: -99;
+}
+
+.content li img {
+    transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -webkit-transition: opacity .5s ease-in-out;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    font-size:90%;
+}
+
+a:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+#bgimg {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -100;
+}
+
+.code {
+    padding: 10px;
+}
+
+.textcontent p {
+    padding-top: 15px;
+}
+
+#top h1 {
+    font-size: 5em;
+    font-weight: 500;
+    margin: 0;
+    margin-top: 20px;
+    text-align: center;
+    font-family: inherit;
+    color: #121319;
+}
+
+.dotted {
+    position: relative;
+}
+
+    .dotted::after {
+        background: url('images/dither_text.png') repeat;
+        content: "";
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 100%;
+        position: absolute;
+    }
+
+
+li p {
+    color: #232733;
+}
+
+hr {
+    width: 100%;
+    height: 3px;
+    border: none;
+    margin: 6px;
+}
+
+.dottedhr {
+    background: url('/images/dither_lowdense.svg') repeat;
+    margin:8px;
+}
+
+
+.footnote{
+    color:#555;
+    font-size:small;
+}
