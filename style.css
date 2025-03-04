@@ -83,6 +83,17 @@ p {
     }
 }
 
+@media (max-width: 600px) {
+    .border {
+        width: 95%;
+        padding:0px;
+    }
+
+    .wide {
+        width: 100%;
+    }
+}
+
 .borderlow {
     background: url('/images/dither_lowdense.svg') repeat;
 }
