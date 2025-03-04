@@ -83,7 +83,7 @@ p {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .border {
         width: 95%;
         padding:0px;
