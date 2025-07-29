@@ -206,7 +206,10 @@ hr {
 }
 
 .link_holder{
-    margin-bottom: 2px;
+    margin-bottom: 0px;
+    font-size: 1em;
+    align-items: right;
+    float:right;
 }
 
 
