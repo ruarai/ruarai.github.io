@@ -1,0 +1,37 @@
+Convert the following citation:
+
+...
+
+To the following format:
+
+<li>
+    <div class="link_holder">
+        [<a href="https://doi.org/10.1101/2025.09.10.25335544" target="_blank">HTML</a>]
+        </div>
+    <hr class="paper_divider">
+    Moss R, <b>Tobin RJ</b>, O'Hara-Wild M, Adekunle AI, Liu D, South T, Morris DJ, Ryan GE, Hao T, Babu A, Senior KL, Wood JG, Golding N, Ross JV, Dawson P, Hyndman RJ, Price DJ, McCaw JM, Shearer FM. Ensemble forecasts of COVID-19 activity to support Australia's pandemic response: 2020–22. <i>medRxiv pre-print</i> (2025)
+    <hr class="dottedhr"/>
+</li>
+<li>
+    <div class="link_holder">
+        [<a href="https://doi.org/10.1038/s43856-025-01086-0" target="_blank">HTML</a>]
+        [<a href="/papers/clinical_forecasting.pdf" target="_blank">PDF</a>]
+        [<a href="https://github.com/ruarai/clinical_forecasting_paper" target="_blank">GitHub</a>]
+        <!-- [<a href="https://osf.io/5e6ma/">Data</a>] -->
+    </div>
+    <hr class="paper_divider">
+    <b>Tobin RJ</b>, Walker CR, Moss R, McCaw JM, Price DJ, Shearer FM. 
+    A modular approach to forecasting COVID-19 hospital bed 
+    occupancy. <i>Communications Medicine</i> (2025)
+    <hr class="dottedhr"/>
+</li>
+<li>
+    <div class="link_holder">
+        [<a href="https://doi.org/10.3390/v17070953" target="_blank">HTML</a>]
+    </div>
+    <hr class="paper_divider">
+    Choi M, Kim J, Kim H, <b>Tobin RJ</b>, Lee S. 
+    Multiscale modeling of hospital length of stay for successive SARS-CoV-2 variants: a multi-state forecasting framework.</a> 
+    <i>Viruses.</i> (2025)
+    <hr class="dottedhr"/>
+</li>
