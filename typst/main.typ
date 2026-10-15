@@ -36,13 +36,6 @@
 )
 
 #table(
-  [*Awards*], [],
-  table.hline(),
-  
-  [2022], [Best Research With Significant Policy Impact Award: COVID-19 national situational assessment (McCaw JM, Shearer FM, Price DJ, Moss R, *Tobin RJ*, Golding N, Ryan G, Hao A, Babu A, Duncan D), Melbourne School of Population and Global Health, The University of Melbourne]
-)
-
-#table(
   table.cell(colspan: 2)[*Invited presentations*],
   table.hline(),
   
@@ -57,6 +50,13 @@
   table.hline(),
 
   ..talks-rows
+)
+
+#table(
+  [*Awards*], [],
+  table.hline(),
+  
+  [2022], [Best Research With Significant Policy Impact Award: COVID-19 national situational assessment (McCaw JM, Shearer FM, Price DJ, Moss R, *Tobin RJ*, Golding N, Ryan G, Hao A, Babu A, Duncan D), Melbourne School of Population and Global Health, The University of Melbourne]
 )
 
 
