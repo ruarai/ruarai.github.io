@@ -47,6 +47,16 @@ jobs:
             any::readr
       - name: Build site and Typst CSVs
         run: Rscript scripts/build.R
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v5
+        with:
+          typst-version: '0.15.1'
+      - name: Install CV font
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes fonts-texgyre
+      - name: Compile CV
+        run: typst compile --root . typst/main.typ _site/cv.pdf
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
