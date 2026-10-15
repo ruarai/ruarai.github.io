@@ -13,6 +13,33 @@
 
 #show link: set text(blue)
 
+// Keep each section heading with its first few rows in one table.
+#let cv-table(title, rows, keep-rows: 2, subtitle: none) = {
+  assert(type(keep-rows) == int and keep-rows >= 0)
+  let cell-count = rows.map(cell => {
+    if type(cell) == content and cell.func() == table.cell {
+      cell.fields().at("colspan", default: 1)
+    } else { 1 }
+  }).sum(default: 0)
+  assert(calc.rem(cell-count, 2) == 0, message: "CV rows must fill two columns")
+  let row-count = 1 + int(cell-count / 2)
+  let kept = calc.min(1 + keep-rows, row-count)
+
+  table(
+    columns: (1fr, 4fr, 0pt),
+    // Reserve the invisible column throughout, so content stays in two columns.
+    table.cell(x: 2, y: 0, rowspan: kept, breakable: false, inset: 0pt)[],
+    ..range(kept, row-count).map(y => table.cell(x: 2, y: y, inset: 0pt)[]),
+    ..if subtitle == none {
+      (table.cell(colspan: 2)[#strong(title)],)
+    } else {
+      (strong(title), subtitle)
+    },
+    table.hline(y: 1, end: 2),
+    ..rows,
+  )
+}
+
 #table(
   [*Ruarai Tobin*], [ruarait\@student.unimelb.edu.au],
   table.hline(),
@@ -21,49 +48,29 @@
        Melbourne, Australia]
 )
 
-#table(
-  table.cell(colspan: 2)[*Education and appointments*],
-  table.hline(),
+#cv-table([Education and appointments], (
   [Oct 2023 -- _ongoing_], [PhD Candidate, The University of Melbourne \ Melbourne Research Scholarship],
   [Mar 2021 -- Oct 2023], [Research Assistant, The University of Melbourne],
   [2017 -- 2020], [Bachelor of Science, _Computational Biology_, The University of Melbourne],
-)
+))
 
-#table(
-  [*Publications*], [],
-  table.hline(), 
-..papers-rows
-)
+#cv-table([Publications], papers-rows)
 
-#table(
-  table.cell(colspan: 2)[*Invited presentations*],
-  table.hline(),
-  
+#cv-table([Invited presentations], (
   [2026], [*Tobin RJ*, Eales O, McCaw JM, Shearer FM. Improving respiratory virus forecasts by capturing the effect of school holidays at the _Centre for Mathematical Modelling of Infectious Diseases, LSHTM_ Spoken presentation. (August 27th 2026, London, United Kingdom)],
   [2023], [Adekunle A, Lee H, Dawson P, *Tobin RJ*, Kim Y. Forecasting COVID-19 in Australia and South Korea at the Nonlinear Dynamics and Mathematical Application Conference (NDMAC). Panel discussion. (August 26th 2023, Busan, Korea)],
-)
+))
 \
 
 
-#table(
-  [*Presentations*], [_Presenting author only_],
-  table.hline(),
+#cv-table([Presentations], talks-rows, subtitle: [_Presenting author only_])
 
-  ..talks-rows
-)
-
-#table(
-  [*Awards*], [],
-  table.hline(),
-  
+#cv-table([Awards], (
   [2022], [Best Research With Significant Policy Impact Award: COVID-19 national situational assessment (McCaw JM, Shearer FM, Price DJ, Moss R, *Tobin RJ*, Golding N, Ryan G, Hao A, Babu A, Duncan D), Melbourne School of Population and Global Health, The University of Melbourne]
-)
+))
 
 
-#table(
-  table.cell(colspan: 2)[*Commissioned research reports*],
-  table.hline(),
-
+#cv-table([Commissioned research reports], (
   [May 2021 -- Dec 2023], [Situational assessment of COVID-19 in Australia. Weekly reports prepared for National Cabinet, the Communicable Diseases Network of Australia and the Australian Health Protection Principal Committee. *Contributing member*, providing COVID-19 case incidence forecasts May 2021 -- November 2021 and hospital bed occupancy forecasts December 2021 -- December 2023; #link("https://doi.org/10.26188/24845328.v3")[10.26188/24845328.v3];],
 
   [Mar 2022 -- Jul 2023], [*Tobin RJ*, Walker C, McCaw JM, Price DJ, Shearer FM. Forecasts of COVID-19 hospital bed and ICU occupancy, prepared on a weekly basis for the New South Wales Ministry of Health.],
@@ -79,17 +86,12 @@
   [Jun -- Jul 2021], [*Tobin RJ*, Shearer FM, Price DJ, McVernon J. Situational assessment reports for COVID-19 in Fiji, delivered to Fiji Ministry of Health and Medical Services, and WHO Western Pacific Regional Office.],
 
   [Apr 2021], [*Tobin RJ*, Harrison LE, Price DJ, Flegg JA, Shearer FM. Updating the spatial distribution of _Plasmodium knowlesi_ zoonotic malaria transmission risk in Indonesia, with summary reporting provided to the Indonesian Ministry of Health.],
-)
+))
 
-#table(
-  [*Media*], [],
-  table.hline(),
+#cv-table([Media], (
   [2024], [(Interviewed for) From macaque to man: the growing threat of zoonotic malaria. _GAVI VaccinesWork_ #link("https://www.gavi.org/vaccineswork/macaque-man-growing-threat-zoonotic-malaria")[(online)].],
-)
-#table(
-  [*Service*], [],
-  table.hline(),
-  
+))
+#cv-table([Service], (
   table.cell(colspan: 2, align: left)[*Committee Membership*],
   [Apr 2025 -- _ongoing_], [Forecasting infrastructure software lead, Australian--Aotearoa Consortium for Epidemic Forecasting & Analytics (ACEFA).],
   [Sep 2024], [Organising committee, SPECTRUM annual meeting 2024.],
@@ -110,18 +112,15 @@
     Public Health Association of Australia (PHAA) \ 
     Statistical Society of Australia (SSA) \ 
   ],
-)
+))
 
-#table(
-  table.cell(colspan: 2)[*Grants and Funding*],
-  table.hline(),
-  
+#cv-table([Grants and Funding], (
   // [Jul 2026], [ARDC ... _Competitive travel grant_. (AUD \$4,934).],
   [Apr 2026], [Maurice Belz Travel Scheme (unredeemed). _Competitive travel grant_. (AUD \$4,934).],
   [Apr 2026], [University of Melbourne Science Abroad Travelling Scholarship (SATS). _Competitive travel grant_. (AUD \$2,000).],
   [Feb 2022], [Lydeamore MJ, *Tobin RJ*, Ampt F, Alpren C, Price DJ. Analysis of spatial heterogeneity in mobility and COVID-19 transmission in the Western Suburbs of Melbourne. _SPECTRUM-SPARK Seed Funding Scheme 2022_. (AUD \$19,000).],
   [May 2022], [Zachreson C, Walker CR, Conway E, *Tobin RJ*, Shearer FM, McVernon J, Geard N. Analysis and modelling of COVID-19 outbreaks and response measures in Residential Aged-Care Facilities. _Australian Government Department of Health and Aged Care contract_ (AUD \$239,000).],
-)
+))
 
 
 
