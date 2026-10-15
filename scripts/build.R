@@ -14,12 +14,20 @@ if (length(args) >= 1L) {
   talks <- googlesheets4::read_sheet(sheet_url, sheet = "Presentations")
 }
 
-validate <- function(data, columns, required, label) {
+# Keep blank display cells visible; only an explicit FALSE hides a presentation.
+# Remove this control column so the positional CSV fields used by Typst stay stable.
+if ("display" %in% names(talks)) {
+  hidden <- toupper(trimws(as.character(talks$display))) %in% "FALSE"
+  talks <- talks[!hidden, ]
+  talks$display <- NULL
+}
+
+validate <- function(data, columns, required, label, allow_empty = FALSE) {
   missing <- setdiff(columns, names(data))
   if (length(missing)) {
     stop(label, " is missing columns: ", paste(missing, collapse = ", "))
   }
-  if (!nrow(data)) stop(label, " has no rows")
+  if (!allow_empty && !nrow(data)) stop(label, " has no rows")
   for (column in required) {
     if (any(is.na(data[[column]]) | !nzchar(trimws(as.character(data[[column]]))))) {
       stop(label, " has empty values in ", column)
@@ -31,7 +39,7 @@ validate(papers,
          c("date_published", "authors", "title", "journal", "DOI", "href_html", "href_github", "href_pdf"),
          c("date_published", "authors", "title", "journal", "href_html"), "Publications")
 validate(talks, c("date", "authors", "title", "type", "venue", "location"),
-         c("date", "authors", "title"), "Presentations")
+         c("date", "authors", "title"), "Presentations", allow_empty = TRUE)
 
 parse_dates <- function(x, label) {
   dates <- as.Date(x)
@@ -47,7 +55,7 @@ escape_html <- function(x) {
   gsub("'", "&#39;", x, fixed = TRUE)
 }
 
-first_in_year <- function(years) c(TRUE, diff(years) != 0)
+first_in_year <- function(years) !duplicated(years)
 
 papers$date_published <- parse_dates(papers$date_published, "Publications")
 papers <- papers[order(papers$date_published, decreasing = TRUE), ]
@@ -93,8 +101,11 @@ day <- as.integer(format(talks$date, "%d"))
 suffix <- ifelse(day %% 100L %in% 11:13, "th",
                  ifelse(day %% 10L == 1L, "st",
                         ifelse(day %% 10L == 2L, "nd", ifelse(day %% 10L == 3L, "rd", "th"))))
-talks$date_nice <- paste(month.name[as.integer(format(talks$date, "%m"))],
-                         paste0(day, suffix), talks$year)
+talks$date_nice <- if (nrow(talks)) {
+  paste(month.name[as.integer(format(talks$date, "%m"))], paste0(day, suffix), talks$year)
+} else {
+  character(0)
+}
 talks$is_first_in_year <- first_in_year(talks$year)
 
 template <- readLines("templates/index.html", encoding = "UTF-8", warn = FALSE)
